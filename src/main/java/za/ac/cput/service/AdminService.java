@@ -3,7 +3,9 @@ package za.ac.cput.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Admin;
+import za.ac.cput.domain.Product;
 import za.ac.cput.repository.AdminRepository;
+import za.ac.cput.service.interfaces.IAdminService;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,12 +30,23 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public void delete(Long id) {
-        adminRepository.deleteById(id);
+    public Admin update(Admin admin) {
+
+       return adminRepository.save(admin);
+    }
+
+    @Override
+    public void delete(Long id) {adminRepository.deleteById(id);
     }
 
     @Override
     public Set<Admin> getAll() {
         return adminRepository.findAll().stream().collect(Collectors.toSet());
     }
+
+    @Override
+    public Admin findByUsernameAndPassword(String username, String password) {
+        return adminRepository.findByUsernameAndPassword(username, password);
+    }
+
 }

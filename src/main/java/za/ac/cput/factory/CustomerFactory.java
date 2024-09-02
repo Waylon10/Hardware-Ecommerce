@@ -3,34 +3,85 @@ package za.ac.cput.factory;
 import za.ac.cput.domain.Address;
 import za.ac.cput.domain.Contact;
 import za.ac.cput.domain.Customer;
+import za.ac.cput.util.AddressHelper;
+import za.ac.cput.util.ContactHelper;
 import za.ac.cput.util.Helper;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class CustomerFactory {
-    public static Customer createCustomer1(String username, String password, String role) {
-        if (Helper.isValidEmail(username) || Helper.isNullOrEmpty(password)|| Helper.isNullOrEmpty(role)) {
-            return null;
-        }
-        return new Customer.Builder()
-                .setUsername(username)
-                .setPassword(password)
-                .setRole(role)
+    public static Customer createCustomer(String username, String password) {
+//        if (ContactHelper.isValidEmail(username) || Helper.isNullOrEmpty(password)) {
+//
+//            throw new IllegalArgumentException(
+//                    "Can not have null or empty values in required fields!!!");
+//        }
+        Contact contact = Contact.builder()
+                .email(username)
+                .build();
+
+        return Customer.builder()
+                .contact(contact)
+                .username(username)
+                .password(password)
+                //
                 .build();
     }
 
-    public static Customer createCustomer2(String username, String firstname, String lastname,Contact contact, String password, String role, Address address) {
-        if (Helper.isValidEmail(username) || Helper.isNullOrEmpty(firstname)|| Helper.isNullOrEmpty(lastname)|| Helper.isNullOrEmpty(String.valueOf(contact))|| Helper.isNullOrEmpty(password)
-                || Helper.isNullOrEmpty(role)|| Helper.isNullOrEmpty(String.valueOf(address))) {
-            return null;
-        }
 
-        return new Customer.Builder()
-                .setUsername(username)
-                .setFirstName(firstname)
-                .setLastName(lastname)
-                .setContact(contact)
-                .setPassword(password)
-                .setRole(role)
-                .setAddress(address)
+    public static Customer createCustomer(String username, String firstname, String lastname, Contact contact, String password, Set<Address> address) {
+//        if (ContactHelper.isValidEmail(username)) {
+//            throw new IllegalArgumentException("Invalid username ");
+//        }
+//        if (Helper.isNullOrEmpty(firstname)) {
+//            throw new IllegalArgumentException("First name cannot be null or empty");
+//        }
+//        if (Helper.isNullOrEmpty(lastname)) {
+//            throw new IllegalArgumentException("Last name cannot be null or empty");
+//        }
+//        if (contact == null) {
+//            throw new IllegalArgumentException("Contact cannot be null");
+//        }
+//        if (Helper.isNullOrEmpty(password)) {
+//            throw new IllegalArgumentException("Password cannot be null or empty");
+//        }
+//        if (address == null) {
+//            address = new HashSet<>();
+//        }
+        return  Customer.builder()
+                .username(username)
+                .firstName(firstname)
+                .lastName(lastname)
+                .contact(contact)
+                .password(password)
+                .address(address)
                 .build();
     }
+    public static Customer createCustomer(String firstName, String lastName, Contact contact) {
+//        if (ContactHelper.isValidEmail(username)) {
+//            throw new IllegalArgumentException("Invalid username ");
+//        }
+//        if (Helper.isNullOrEmpty(firstName)) {
+//            throw new IllegalArgumentException("First name cannot be null or empty");
+//        }
+//        if (Helper.isNullOrEmpty(lastName)) {
+//            throw new IllegalArgumentException("Last name cannot be null or empty");
+//        }
+//        if (contact == null) {
+//            throw new IllegalArgumentException("Contact cannot be null");
+//        }
+//        if (Helper.isNullOrEmpty(password)) {
+//            throw new IllegalArgumentException("Password cannot be null or empty");
+//        }
+        return  Customer.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .contact(contact)
+                .build();
+    }
+
 }
+

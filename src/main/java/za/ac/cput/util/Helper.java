@@ -1,45 +1,33 @@
 package za.ac.cput.util;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-
 public class Helper {
     public static boolean isNullOrEmpty(String s) {
-        if (s == null || s.isEmpty())
-           return true;
-        return false;
+        return s == null || s.isEmpty() || s.isBlank();
+
     }
 
-    public static boolean isValidEmail(String email) {
-        boolean result = false;
-        try {
-            InternetAddress emailAddr = new InternetAddress(email);
-            emailAddr.validate();
-        } catch (AddressException ex) {
-            result = true;
+    public static void checkStringParam(String s) {
+        if (isNullOrEmpty(s)) {
+            throw new RuntimeException("String parameter is invalid");
         }
-        return result;
-    }
-    public static boolean isValidPostalCode(String postalCode) {
-        return postalCode.matches("\\d{4,5}");
     }
 
-    public static boolean isValidStreetNumber(String streetNumber) {
-        return streetNumber.matches("\\d+[a-zA-Z]?");
+    public static boolean checkNullParam(Object obj) {
+//        if (obj == null) {
+//            throw new RuntimeException("Object parameter is null");
+//        }
+        return obj == null;
     }
 
-    public static boolean isValidStandaloneAddress(String streetNumber, String streetName, String city, String state, String postalCode) {
-        return !isNullOrEmpty(streetNumber) && !isNullOrEmpty(streetName) && !isNullOrEmpty(city) && !isNullOrEmpty(state) && isValidPostalCode(postalCode);
+    public static void checkZeroOrNegativeParam(int number) {
+        if (number <= 0) {
+            throw new RuntimeException("Number parameter is invalid");
+        }
     }
 
-    public static boolean isValidApartmentAddress(String apartmentNumber, String complexName, String streetName, String city, String state, String postalCode) {
-        return !isNullOrEmpty(apartmentNumber) && !isNullOrEmpty(complexName) && !isNullOrEmpty(streetName) && !isNullOrEmpty(city) && !isNullOrEmpty(state) && isValidPostalCode(postalCode);
-    }
-
-    public static boolean isValidUnitAddress(String unitNumber, String buildingName, String streetName, String city, String state, String postalCode) {
-        return !isNullOrEmpty(unitNumber) && !isNullOrEmpty(buildingName) && !isNullOrEmpty(streetName) && !isNullOrEmpty(city) && !isNullOrEmpty(state) && isValidPostalCode(postalCode);
-    }
-    public static boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("\\+?\\d{10,15}");
+    public static void checkZeroOrNegativeParam(float number) {
+        if (number <= 0) {
+            throw new RuntimeException("Number parameter is invalid");
+        }
     }
 }

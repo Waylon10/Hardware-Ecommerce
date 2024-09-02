@@ -19,7 +19,7 @@ class AdminFactoryTest {
     void a_createAdmin() {
         Contact contact = ContactFactory.createContact("matt@gmail.com", "0812345679");
         assertNotNull(contact);
-        Admin admin = AdminFactory.createAdmin(contact.getEmail(), "123456","admin",contact);
+        Admin admin = AdminFactory.createAdmin(contact.getEmail(), "123456",contact);
 
         assertNotNull(admin);
         System.out.println(admin);
@@ -29,7 +29,7 @@ class AdminFactoryTest {
     void b_createAdmin_Failed() {
         Contact contact = ContactFactory.createContact("invalid.com", "0218945612");
         assertNotNull(contact);
-        Admin admin = AdminFactory.createAdmin(contact.getEmail(), "123456","admin",contact);
+        Admin admin = AdminFactory.createAdmin(contact.getEmail(), "123456", contact);
 
         assertNotNull(admin);
         System.out.println(admin);
